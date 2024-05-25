@@ -13,4 +13,5 @@ OPTIONAL:
     -f --fasta FILENAME (indexed fasta reference genome file)
     -m --min-var-frequency FREQUENCY (minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2)
     -h --min-homo-frequency FREQUENCY (minumum frequency to call a non-reference a homozygous mutation. If not called: will auto to 0.8)
-    
+
+The output will be specific chromosome positions as well as the alternative allele frequency
