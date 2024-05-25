@@ -29,6 +29,7 @@ if __name__ == "__main__":
     if args.min_frequency_for_hom != None :
         min_frequency_for_hom = args.min_frequency_for_hom
 
-    mpileup_parser = MpileupParser(parser.mpileup)
-    caller = VariantCaller(mpileup_parser)
+    # TODO: Include freqs for the variant caller
+    mpileup_parser = MpileupParser(mpileup)
+    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom)
     caller.process()

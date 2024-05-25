@@ -1,11 +1,12 @@
-from mpileup_parser import MpileupParser
+from mVarScan import MpileupParser
 
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
 class VariantCaller:
-    def __init__(self, parser, min_var_freq):
+    def __init__(self, parser, min_var_frequency, min_frequency_for_hom):
         self.parser = parser
-        self.min_var_freq = min_var_freq
+        self.min_var_freq = min_var_frequency
+        self.min_frequency_for_hom = min_frequency_for_hom
 
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
