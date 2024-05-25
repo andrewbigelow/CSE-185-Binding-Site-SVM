@@ -2,11 +2,15 @@ README
 
 This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs within a given alligned genome in the form of a mpileup file.
 
+REQUIREMENTS:
+    - ensure that you have python 3.10 and above
+
 INSTALLATION:
 
 
+
 BASIC USAGE:
-    mVarScan [FILE.mpileup] 
+    path/to/file/main.py [mpileup]
 
 OPTIONAL:
     -o --out  FILENAME (file to output contents to)
