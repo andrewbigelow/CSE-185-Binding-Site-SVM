@@ -16,9 +16,14 @@ class VariantCaller:
                     return True, base, freq
         return False, None, 0
 
-    def is_homozygous_nonreference_SNP(base, freq, min_homozygous_freq) :
-        if freq > min_homozygous_freq :
-            return True, base, freq
+
+    # Call if is_SNP() returns true
+    def is_homozygous_nonreference_SNP(self, counts, total_reads) :
+        for base, count in counts.items() :
+            if base != 'N' and base != 'del' :
+                freq = count / total_reads
+                if freq > self.min_homo_freq :
+                    return True, base, freq
         return False, None, 0
 
     def count_bases(self, read_bases):
@@ -42,4 +47,8 @@ class VariantCaller:
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
-                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
+                    #is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
+                   # if (is_homo) :
+                        # print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
+                    #else:
+                    print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
