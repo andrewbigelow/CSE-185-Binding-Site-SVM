@@ -1,4 +1,4 @@
-from mVarScan import MpileupParser
+from mpileup_parser import MpileupParser
 
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
@@ -34,12 +34,12 @@ class VariantCaller:
     
     # TODO: Check if total reads is correct
     def process(self):
-        file =  open(self.parser.mpileup_file, 'r')
+        file =  self.parser.read_mpileup_file()
         for line in file:
             chrom, pos, ref_base, coverages, reads = self.parser.parse_line(line)
             for read in reads:
                 counts = self.count_bases(read)
                 total_reads = sum(counts.values())
-                is_variant, variant_base, freq = self.is_snp(counts, total_reads)
+                is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
                         print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")

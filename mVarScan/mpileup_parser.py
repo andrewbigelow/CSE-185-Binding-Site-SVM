@@ -16,8 +16,7 @@ class MpileupParser:
 
     def parse_line(self, line):
         """Parses a single line of the mpileup file."""
-        columns = line.strip().split('\t')
-        
+        columns = line.strip().split()
         if len(columns) < 5:
             raise ValueError(f"Invalid mpileup format in line: {line}")
         
@@ -26,5 +25,4 @@ class MpileupParser:
         ref_base = columns[2]
         depth = int(columns[3])
         reads = columns[4]
-        
         return (chromosome, position, ref_base, depth, reads)
