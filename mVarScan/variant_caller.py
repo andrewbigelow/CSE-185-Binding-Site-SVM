@@ -10,7 +10,7 @@ class VariantCaller:
 
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
-            if base != 'N' and base != 'del' :
+            if base != 'N' and base != 'del' and base != '.' and base != ',':
                 freq = count / total_reads
                 if freq > self.min_var_freq :
                     return True, base, freq
@@ -22,18 +22,18 @@ class VariantCaller:
         return False, None, 0
 
     def count_bases(self, read_bases):
-        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0}
+        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0, '.': 0, ',': 0}
         for base in read_bases:
             if(base in counts):
                 counts[base] += 1
             elif(base.upper() in counts):
                 counts[base.upper()] += 1
-            elif(base == '*' | base == '-'):
+            elif(base == '*' or base == '-'):
                 counts['del'] += 1
         return counts
     
     # TODO: Check if total reads is correct
-    def process(self):
+    def find_snps(self):
         file =  self.parser.read_mpileup_file()
         for line in file:
             chrom, pos, ref_base, coverages, reads = self.parser.parse_line(line)
@@ -42,4 +42,4 @@ class VariantCaller:
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
-                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
+                        print(f"SNP! {chrom}:{pos} -> {ref_base} to {variant_base}/ frequency: {freq:.2f}")

@@ -28,10 +28,10 @@ if __name__ == "__main__":
         min_var_frequency = args.min_var_frequency
     
     min_frequency_for_hom = 0.8
-    if args.min_frequency_for_hom is not None :
+    if args.min_freq_for_hom is not None :
         min_frequency_for_hom = args.min_frequency_for_hom
 
     # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
     caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom)
-    caller.process()
+    caller.find_snps()
