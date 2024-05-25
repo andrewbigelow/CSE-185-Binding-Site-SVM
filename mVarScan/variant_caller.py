@@ -12,7 +12,7 @@ def is_SNP(counts, total_reads, min_var_freq) :
 def is_homozygous_nonreference_SNP(base, freq, min_homozygous_freq) :
     if freq > min_homozygous_freq :
         return True, base, freq
-    return False, None, 0    print("hello")
+    return False, None, 0  
 
 def count_bases(self, read_bases):
     counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0}
@@ -24,15 +24,3 @@ def count_bases(self, read_bases):
         elif(base == '*' | base == '-'):
             counts['del'] += 1
     return counts
-
-
-def main() :
-    # Populate variables from command line tool
-    mpileup = args.mpileup
-    min_var_frequency = 0.2
-    if args.min_var_frequency != None :
-        min_var_frequency = args.min_var_frequency
-    
-    min_frequency_for_hom = 0.8
-    if args.min_frequency_for_hom != None :
-        min_frequency_for_hom = args.min_frequency_for_hom
