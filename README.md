@@ -1,5 +1,8 @@
 README
 
+UPDATE: Change in plan.
+New Project: VarScan for SNP
+
 Future Directions
 - Web scrapper to collect positive and negatives examples for a given species
 - Choose the size as well 
