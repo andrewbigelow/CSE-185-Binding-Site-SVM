@@ -6,7 +6,7 @@ This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs 
 - ensure that you have python 3.10 and above
 
 ## INSTALLATION:
-    - fork and clone the git repository or download the code locally
+- fork and clone the git repository or download the code locally
 
 
 ## BASIC USAGE:
