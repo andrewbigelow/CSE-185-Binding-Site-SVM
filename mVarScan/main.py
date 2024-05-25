@@ -1,4 +1,4 @@
-from mVarScan import MpileupParser, VariantCaller, FileParsing
+from mVarScan import MpileupParser, VariantCaller
 import argparse
 
 if __name__ == "__main__":
