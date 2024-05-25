@@ -13,7 +13,7 @@ if __name__ == "__main__":
     parser.add_argument("-m", "--min-var-frequency", \
                         help="minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2", \
                         type=float, required=False)
-    parser.add_argument("-h", "--min-freq-for-hom", \
+    parser.add_argument("-h", "--min-homo-frequency", \
                         help="minumum frequency to call a non-reference a homozygous mutation. If not called: will auto to 0.8", \
                         type=float, required=False)
 
