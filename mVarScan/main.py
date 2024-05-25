@@ -22,11 +22,11 @@ if __name__ == "__main__":
     # Populate variables from command line tool
     mpileup = args.mpileup
     min_var_frequency = 0.2
-    if args.min_var_frequency != None :
+    if args.min_var_frequency is not None :
         min_var_frequency = args.min_var_frequency
     
     min_frequency_for_hom = 0.8
-    if args.min_frequency_for_hom != None :
+    if args.min_frequency_for_hom is not None :
         min_frequency_for_hom = args.min_frequency_for_hom
 
     # TODO: Include freqs for the variant caller
