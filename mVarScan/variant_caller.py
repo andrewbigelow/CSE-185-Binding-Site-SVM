@@ -42,5 +42,3 @@ class VariantCaller:
                 is_variant, variant_base, freq = self.is_snp(counts, total_reads)
                 if is_variant:
                         print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
-
-
