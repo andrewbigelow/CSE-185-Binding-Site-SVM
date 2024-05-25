@@ -1,4 +1,4 @@
-# README
+# mVarScan
 
 This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs within a given alligned genome in the form of a mpileup file.
 
