@@ -36,7 +36,7 @@ class VariantCaller:
                 counts['del'] += 1
         return counts
     
-    def get_pval(counts, ref_base):
+    def get_pval(self, counts):
         ref_count = 0
         alt_count = 0
         total_count = 0
@@ -66,9 +66,9 @@ class VariantCaller:
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
-                    odds_ratio, pval = self.get_pval(counts, ref_base)
+                    odds_ratio, pval = self.get_pval(counts)
                     is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
                     if (is_homo and pval < self.pvalue) :
-                        print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")
+                        print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}")
                     elif (pval < self.pvalue):
-                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")
+                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}")
