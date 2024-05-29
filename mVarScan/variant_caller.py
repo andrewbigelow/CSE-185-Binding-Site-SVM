@@ -1,4 +1,5 @@
 from mpileup_parser import MpileupParser
+from scipy.stats import fisher_exact 
 
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
@@ -34,6 +35,16 @@ class VariantCaller:
                 counts['del'] += 1
         return counts
     
+    def get_pval(counts, ref_base):
+        alt_list = ['A', 'T', 'C', 'G', 'N', 'a', 'c', 'g', 't', 'n']
+        ref_count = counts.get(ref_base, 0)
+        alt_counts = {base: counts.get(base, 0) for base in alt_list}
+        p_value = None
+        table = [[ref_count, alt_counts], [sum(counts.values()) - ref_count, sum(counts.values()) - alt_counts]]
+        _, p_value = fisher_exact(table)
+
+        return p_value
+    
     # TODO: Check if total reads is correct
     def find_snps(self):
         file =  self.parser.read_mpileup_file()
@@ -44,8 +55,9 @@ class VariantCaller:
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
-                    #is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
-                    # if (is_homo) :
-                    # print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
-                    #else:
-                    print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f}")
+                    pval = get_pval(counts, ref_base)
+                    is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
+                    if (is_homo) :
+                        print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")
+                    else:
+                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")
