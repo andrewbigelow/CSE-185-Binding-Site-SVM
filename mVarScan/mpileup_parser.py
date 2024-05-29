@@ -23,6 +23,7 @@ class MpileupParser:
         chromosome = columns[0]
         position = int(columns[1])
         ref_base = columns[2]
-        depth = int(columns[3])
-        reads = columns[4]
+        depth = columns[3::3]
+        reads = columns[4::3]
+
         return (chromosome, position, ref_base, depth, reads)
