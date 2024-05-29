@@ -11,7 +11,6 @@ if __name__ == "__main__":
 
     parser.add_argument("mpileup", help="mpileup file", type=str, metavar="FILE")
     parser.add_argument("-o", "--out", help="Write output to file. ", metavar="FILE", type=str, required=False)
-    parser.add_argument("-f", "--fasta-ref", help="indexed fasta reference genome file", type=str, metavar="FILE", required=False)
     parser.add_argument("-m", "--min-var-frequency", \
                         help="minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2", \
                         type=float, required=False)
