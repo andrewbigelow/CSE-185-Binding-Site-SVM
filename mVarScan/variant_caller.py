@@ -4,10 +4,11 @@ from scipy.stats import fisher_exact
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
 class VariantCaller:
-    def __init__(self, parser, min_var_frequency, min_frequency_for_hom):
+    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue):
         self.parser = parser
         self.min_var_freq = min_var_frequency
         self.min_frequency_for_hom = min_frequency_for_hom
+        self.pvalue = pvalue
 
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
@@ -38,16 +39,19 @@ class VariantCaller:
     def get_pval(counts, ref_base):
         ref_count = 0
         alt_count = 0
+        total_count = 0
+
         for count in counts:
             if count == '.' or count == ',' :
                 ref_count += counts[count]
+                total_count += counts[count]
             elif count == 'del' :
                 continue
             else :
-                alt_counts += counts[count]
-
-        p_value = None
-        table = [[ref_count, alt_count], [sum(counts.values()) - ref_count, sum(counts.values()) - alt_count]]
+                alt_count += counts[count]
+                total_count += counts[count]
+        
+        table = [[ref_count, alt_count], [total_count - ref_count, total_count - alt_count]]
         _, p_value = fisher_exact(table)
 
         return p_value
@@ -62,9 +66,9 @@ class VariantCaller:
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 if is_variant:
-                    pval = get_pval(counts, ref_base)
+                    pval = self.get_pval(counts, ref_base)
                     is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
-                    if (is_homo) :
+                    if (is_homo and pval < self.pvalue) :
                         print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")
-                    else:
+                    elif (pval < self.pvalue):
                         print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval}")

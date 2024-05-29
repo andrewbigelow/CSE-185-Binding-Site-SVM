@@ -18,6 +18,9 @@ if __name__ == "__main__":
     parser.add_argument("-a", "--min-freq-for-hom", \
                         help="minumum frequency to call a non-reference a homozygous mutation. If not called: will auto to 0.8", \
                         type=float, required=False)
+    parser.add_argument("-p", "--pvalue", \
+                        help="minumum frequency to call a non-reference a homozygous mutation. If not called: will auto to 0.99", \
+                        type=float, required=False)
 
     args = parser.parse_args()
     
@@ -31,7 +34,11 @@ if __name__ == "__main__":
     if args.min_freq_for_hom is not None :
         min_frequency_for_hom = args.min_frequency_for_hom
 
+    pvalue = 0.99
+    if args.pvalue is not None : 
+        pvalue = args.pvalue
+
     # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
-    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom)
+    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue)
     caller.find_snps()
