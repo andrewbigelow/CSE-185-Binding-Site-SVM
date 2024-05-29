@@ -36,11 +36,18 @@ class VariantCaller:
         return counts
     
     def get_pval(counts, ref_base):
-        alt_list = ['A', 'T', 'C', 'G', 'N', 'a', 'c', 'g', 't', 'n']
-        ref_count = counts.get(ref_base, 0)
-        alt_counts = {base: counts.get(base, 0) for base in alt_list}
+        ref_count = 0
+        alt_count = 0
+        for count in counts:
+            if count == '.' or count == ',' :
+                ref_count += counts[count]
+            elif count == 'del' :
+                continue
+            else :
+                alt_counts += counts[count]
+
         p_value = None
-        table = [[ref_count, alt_counts], [sum(counts.values()) - ref_count, sum(counts.values()) - alt_counts]]
+        table = [[ref_count, alt_count], [sum(counts.values()) - ref_count, sum(counts.values()) - alt_count]]
         _, p_value = fisher_exact(table)
 
         return p_value
