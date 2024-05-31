@@ -36,8 +36,11 @@ if __name__ == "__main__":
     pvalue = 0.99
     if args.pvalue is not None : 
         pvalue = args.pvalue
+    
+    if args.out is not None:
+        output_file = args.out
 
     # TODO: Include freqs for the variant caller
-    mpileup_parser = MpileupParser(mpileup)
-    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue)
+    mpileup_parser = MpileupParser(mpileup, output_file)
+    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file)
     caller.find_snps()
