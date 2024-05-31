@@ -4,11 +4,12 @@ from scipy.stats import fisher_exact
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
 class VariantCaller:
-    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue):
+    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file):
         self.parser = parser
         self.min_var_freq = min_var_frequency
         self.min_frequency_for_hom = min_frequency_for_hom
         self.pvalue = pvalue
+        self.output_file = output_file
 
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
@@ -59,6 +60,7 @@ class VariantCaller:
     # TODO: Check if total reads is correct
     def find_snps(self):
         file =  self.parser.read_mpileup_file()
+        results = []
         for line in file:
             chrom, pos, ref_base, coverages, reads = self.parser.parse_line(line)
             for read in reads:
@@ -69,6 +71,21 @@ class VariantCaller:
                     odds_ratio, pval = self.get_pval(counts)
                     is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
                     if (is_homo and pval < self.pvalue) :
-                        print(f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}")
+                        result = f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}"
                     elif (pval < self.pvalue):
-                        print(f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}")
+                        result = f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}"
+                    else:
+                            result = None
+                    
+                    if result:
+                        if self.output_file:
+                            results.append(result)
+                        else:
+                            print(result)    
+
+        # Output to a regular file first
+        if self.output_file is not None:
+            with open(self.output_file, 'w') as f:
+                for result in results:
+                    f.write(result + '\n')
+                print("Results of mVarScan output to " + self.output_file)
