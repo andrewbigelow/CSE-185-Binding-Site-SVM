@@ -4,12 +4,13 @@ from scipy.stats import fisher_exact
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
 class VariantCaller:
-    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file):
+    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads=2):
         self.parser = parser
         self.min_var_freq = min_var_frequency
         self.min_frequency_for_hom = min_frequency_for_hom
         self.pvalue = pvalue
         self.output_file = output_file
+        self.min_reads = min_reads
 
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
@@ -75,7 +76,7 @@ class VariantCaller:
                     elif (pval < self.pvalue):
                         result = f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio}"
                     else:
-                            result = None
+                        result = None
                     
                     if result:
                         if self.output_file:

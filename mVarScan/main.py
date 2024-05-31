@@ -21,6 +21,7 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--pvalue", \
                         help="minumum frequency to call a non-reference a homozygous mutation. If not called: will auto to 0.99", \
                         type=float, required=False)
+    parser.add_argument("-r2", "--min-reads2", help="Minimum supporting reads at a position to call variants. If not called: will auto to 2", type=int, required=False, default=2)
 
     args = parser.parse_args()
     
@@ -41,11 +42,16 @@ if __name__ == "__main__":
     if args.out is not None:
         output_file = args.out
     
+    # TODO: implement VCF output
     if args.vcf is not None:
         vcf = args.vcf
+
+    min_reads2 = 2
+    if args.min_reads2 is not None:
+        min_reads2 = args.min_reads2
 
     
     # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
-    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file)
+    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads2)
     caller.find_snps()
