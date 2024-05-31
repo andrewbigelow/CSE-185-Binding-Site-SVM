@@ -83,9 +83,11 @@ class VariantCaller:
                         else:
                             print(result)    
 
-        # Output to a regular file first
+        # Output to a file
         if self.output_file is not None:
             with open(self.output_file, 'w') as f:
                 for result in results:
                     f.write(result + '\n')
                 print("Results of mVarScan output to " + self.output_file)
+
+        # TODO: add VCF and CSV TSV options
