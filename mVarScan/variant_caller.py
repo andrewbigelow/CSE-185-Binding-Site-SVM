@@ -68,7 +68,8 @@ class VariantCaller:
                 counts = self.count_bases(read)
                 total_reads = sum(counts.values())
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
-                if is_variant:
+                # is variant and reads are more than or equal to threshold (min_reads)
+                if is_variant and counts.get(variant_base, 0) >= self.min_reads:
                     odds_ratio, pval = self.get_pval(counts)
                     is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
                     if (is_homo and pval < self.pvalue) :
