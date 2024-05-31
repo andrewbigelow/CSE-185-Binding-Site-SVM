@@ -1,9 +1,8 @@
 import os
 
 class MpileupParser:
-    def __init__(self, mpileup_file, output_file=None):
+    def __init__(self, mpileup_file):
         self.mpileup_file = mpileup_file
-        self.output_file = output_file
 
     def read_mpileup_file(self):
         """Reads the mpileup file and returns its content as a list of lines."""

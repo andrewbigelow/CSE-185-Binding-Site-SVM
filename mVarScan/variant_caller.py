@@ -88,6 +88,6 @@ class VariantCaller:
             with open(self.output_file, 'w') as f:
                 for result in results:
                     f.write(result + '\n')
-                print("Results of mVarScan output to " + self.output_file)
+                print("Results of mVarScan output to: " + self.output_file)
 
         # TODO: add VCF and CSV TSV options

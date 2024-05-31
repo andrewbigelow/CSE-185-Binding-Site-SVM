@@ -11,6 +11,7 @@ if __name__ == "__main__":
 
     parser.add_argument("mpileup", help="mpileup file", type=str, metavar="FILE")
     parser.add_argument("-o", "--out", help="Write output to simple text file. ", metavar="FILE", type=str, required=False)
+    parser.add_argument("-vcf", "--vcf", help="Write output to VCF format file. ", metavar="FILE", type=str, required=False)
     parser.add_argument("-m", "--min-var-frequency", \
                         help="minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2", \
                         type=float, required=False)
@@ -39,10 +40,12 @@ if __name__ == "__main__":
     
     if args.out is not None:
         output_file = args.out
+    
+    if args.vcf is not None:
+        vcf = args.vcf
 
     
-
     # TODO: Include freqs for the variant caller
-    mpileup_parser = MpileupParser(mpileup, output_file)
+    mpileup_parser = MpileupParser(mpileup)
     caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file)
     caller.find_snps()
