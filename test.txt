@@ -1,46 +1,22 @@
-Homozygous SNP found at chr6:128414945 -> c to T with frequency 1.00 and p value 7.619481455868034e-26 and Odds ratio 0.0
-Homozygous SNP found at chr6:128419307 -> T to A with frequency 0.43 and p value 0.18565115589041542 and Odds ratio 1.7777777777777777
-Homozygous SNP found at chr6:128421762 -> C to T with frequency 1.00 and p value 1.1912487392419474e-24 and Odds ratio 0.0
-Homozygous SNP found at chr6:128435303 -> c to T with frequency 0.45 and p value 0.42845988951883474 and Odds ratio 1.4820415879017013
-Homozygous SNP found at chr6:128446509 -> c to T with frequency 1.00 and p value 8.35033111358791e-38 and Odds ratio 0.0
-Homozygous SNP found at chr6:128446747 -> c to T with frequency 0.21 and p value 6.233574085642851e-07 and Odds ratio 12.641975308641975
-Homozygous SNP found at chr6:128450019 -> T to G with frequency 0.52 and p value 0.8552344413446412 and Odds ratio 0.8751300728407908
-Homozygous SNP found at chr6:128461032 -> A to T with frequency 0.46 and p value 0.2740397507765118 and Odds ratio 1.4010828821324448
-Homozygous SNP found at chr6:128465668 -> c to T with frequency 0.43 and p value 0.19344464378206006 and Odds ratio 1.7424
-Homozygous SNP found at chr6:128469937 -> T to A with frequency 0.39 and p value 0.04281045356588453 and Odds ratio 2.4930747922437675
-Homozygous SNP found at chr6:128471913 -> a to C with frequency 0.48 and p value 0.8349802033146689 and Odds ratio 1.1900826446280992
-Homozygous SNP found at chr6:128484504 -> A to G with frequency 0.56 and p value 0.2609844130348432 and Odds ratio 0.6103515625
-Homozygous SNP found at chr6:128486139 -> A to C with frequency 0.54 and p value 0.5405383878635569 and Odds ratio 0.7159763313609467
-Homozygous SNP found at chr6:128488195 -> T to C with frequency 0.45 and p value 0.4457679641637144 and Odds ratio 1.44
-Homozygous SNP found at chr6:128490928 -> A to G with frequency 0.24 and p value 0.10674302153999635 and Odds ratio 0.5625
-Homozygous SNP found at chr6:128493991 -> G to T with frequency 0.61 and p value 0.03378597928519567 and Odds ratio 0.4049586776859504
-Homozygous SNP found at chr6:128494093 -> C to G with frequency 0.48 and p value 0.7336232469512525 and Odds ratio 1.1900826446280992
-Homozygous SNP found at chr6:128496557 -> c to T with frequency 1.00 and p value 1.1912487392419474e-24 and Odds ratio 0.0
-Homozygous SNP found at chr6:128503550 -> t to C with frequency 0.43 and p value 0.21563913619030167 and Odds ratio 1.8225
-Homozygous SNP found at chr6:128504947 -> A to T with frequency 0.33 and p value 0.8917980116517761 and Odds ratio 1.0768956924172304
-Homozygous SNP found at chr6:128505804 -> A to C with frequency 0.46 and p value 0.6422696851518308 and Odds ratio 1.3840830449826989
-Homozygous SNP found at chr6:128514053 -> g to A with frequency 0.38 and p value 0.11438172927410734 and Odds ratio 2.677685950413223
-Homozygous SNP found at chr6:128515718 -> T to C with frequency 0.47 and p value 0.6863983709005654 and Odds ratio 1.277882797731569
-Homozygous SNP found at chr6:128522002 -> a to G with frequency 0.29 and p value 0.28613053613053613 and Odds ratio 6.25
-Homozygous SNP found at chr6:128532763 -> G to C with frequency 0.52 and p value 0.8575597996885299 and Odds ratio 0.87890625
-Homozygous SNP found at chr6:128537687 -> t to A with frequency 0.26 and p value 7.32983034840946e-05 and Odds ratio 7.84
-Homozygous SNP found at chr6:128547906 -> c to A with frequency 0.25 and p value 0.02945975126296659 and Odds ratio 0.4814660558100791
-Homozygous SNP found at chr6:128559329 -> C to T with frequency 0.45 and p value 0.599873087709558 and Odds ratio 1.514792899408284
-Homozygous SNP found at chr6:128564669 -> g to T with frequency 0.47 and p value 0.02831685193020621 and Odds ratio 0.2975206611570248
-Homozygous SNP found at chr6:128568999 -> C to T with frequency 0.42 and p value 0.16952999964381144 and Odds ratio 1.859504132231405
-Homozygous SNP found at chr6:128572877 -> C to A with frequency 0.56 and p value 0.22983791461728392 and Odds ratio 0.6232686980609419
-Homozygous SNP found at chr6:128583972 -> G to A with frequency 0.33 and p value 0.01938318826178997 and Odds ratio 4.0
-Homozygous SNP found at chr6:128583983 -> T to G with frequency 0.24 and p value 0.0001780247357212105 and Odds ratio 9.877551020408163
-Homozygous SNP found at chr6:128583998 -> T to A with frequency 0.21 and p value 3.975114052982763e-05 and Odds ratio 13.444444444444445
-Homozygous SNP found at chr6:128585618 -> A to C with frequency 0.28 and p value 0.0002397233376149409 and Odds ratio 6.479338842975206
-Homozygous SNP found at chr6:128591818 -> T to G with frequency 0.36 and p value 0.015872962080510505 and Odds ratio 3.24
-Homozygous SNP found at chr6:128599268 -> t to T with frequency 0.48 and p value 1.2336963697080377e-09 and Odds ratio 0.24082647462277093
-Homozygous SNP found at chr6:128599580 -> c to A with frequency 0.52 and p value 0.8446462655912002 and Odds ratio 0.8573388203017832
-Homozygous SNP found at chr6:128599902 -> c to A with frequency 1.00 and p value 7.619481455868034e-26 and Odds ratio 0.0
-Homozygous SNP found at chr6:128600357 -> t to A with frequency 0.29 and p value 0.0770656188863545 and Odds ratio 2.179138321995465
-Homozygous SNP found at chr6:128602090 -> a to C with frequency 0.30 and p value 0.0003388913682285733 and Odds ratio 5.224489795918367
-Homozygous SNP found at chr6:128602577 -> T to C with frequency 0.46 and p value 0.5318709239864039 and Odds ratio 1.417233560090703
-Homozygous SNP found at chr6:128602796 -> C to T with frequency 0.35 and p value 0.003691176248105164 and Odds ratio 3.3933518005540164
-Homozygous SNP found at chr6:128603361 -> C to T with frequency 0.53 and p value 0.6665011644790679 and Odds ratio 0.7561436672967864
-Homozygous SNP found at chr6:128604078 -> C to T with frequency 0.57 and p value 0.22528553647048227 and Odds ratio 0.5625
-Homozygous SNP found at chr6:128604571 -> A to C with frequency 0.44 and p value 0.38848039611473817 and Odds ratio 1.5955678670360112
+Homozygous SNP found at chr6:128414945 -> c to T with frequency 1.00 and p value 1.2633713261944359e-30 and Odds ratio 0.0 with 52 reads
+Homozygous SNP found at chr6:128419307 -> T to A with frequency 0.46 and p value 0.5487442937918308 and Odds ratio 1.3780718336483933 with 23 reads
+Homozygous SNP found at chr6:128421762 -> C to T with frequency 1.00 and p value 8.21129308980829e-35 and Odds ratio 0.0 with 59 reads
+Homozygous SNP found at chr6:128429214 -> A to A with frequency 0.29 and p value 3.793797086402467e-05 and Odds ratio 0.25 with 27 reads
+Homozygous SNP found at chr6:128431579 -> c to A with frequency 0.24 and p value 2.533833807109974e-05 and Odds ratio 10.5625 with 8 reads
+Homozygous SNP found at chr6:128435303 -> c to T with frequency 0.47 and p value 0.6863983709005654 and Odds ratio 1.277882797731569 with 23 reads
+Homozygous SNP found at chr6:128442104 -> G to T with frequency 0.57 and p value 0.16028331357100192 and Odds ratio 0.5726807888970051 with 37 reads
+Homozygous SNP found at chr6:128446509 -> c to T with frequency 1.00 and p value 3.013158575729631e-25 and Odds ratio 0.0 with 43 reads
+Homozygous SNP found at chr6:128461032 -> A to T with frequency 0.45 and p value 0.1673990896934372 and Odds ratio 1.5228610230873698 with 47 reads
+Homozygous SNP found at chr6:128465668 -> c to T with frequency 0.56 and p value 0.2850222132588779 and Odds ratio 0.64 with 35 reads
+Homozygous SNP found at chr6:128469937 -> T to A with frequency 0.58 and p value 0.11126580731110082 and Odds ratio 0.5325054784514244 with 37 reads
+Homozygous SNP found at chr6:128470316 -> t to G with frequency 0.27 and p value 0.08610893750212636 and Odds ratio 7.111111111111111 with 3 reads
+Homozygous SNP found at chr6:128470323 -> a to G with frequency 0.21 and p value 0.007028212759805167 and Odds ratio 13.444444444444445 with 3 reads
+Homozygous SNP found at chr6:128471913 -> a to C with frequency 0.42 and p value 0.08366074335310428 and Odds ratio 1.9400510204081634 with 28 reads
+Homozygous SNP found at chr6:128486139 -> A to C with frequency 0.52 and p value 0.8597765954044011 and Odds ratio 0.8824609733700642 with 33 reads
+Homozygous SNP found at chr6:128488195 -> T to C with frequency 0.56 and p value 0.3651707023996226 and Odds ratio 0.5971074380165289 with 22 reads
+Homozygous SNP found at chr6:128490928 -> A to G with frequency 0.29 and p value 1.606459332342562e-13 and Odds ratio 0.16735537190082644 with 55 reads
+Homozygous SNP found at chr6:128493991 -> G to T with frequency 0.59 and p value 0.11271301556435451 and Odds ratio 0.49 with 30 reads
+Homozygous SNP found at chr6:128494093 -> C to G with frequency 0.52 and p value 0.8416153388386696 and Odds ratio 0.8520710059171598 with 26 reads
+Homozygous SNP found at chr6:128496528 -> t to C with frequency 0.22 and p value 3.519716950840571e-09 and Odds ratio 11.982248520710058 with 13 reads
+Homozygous SNP found at chr6:128496557 -> c to T with frequency 1.00 and p value 5.12045820465753e-33 and Odds ratio 0.0 with 56 reads
+Homozygous SNP found at chr6:128499801 -> C to T with frequency 0.25 and p value 0.04946736014206317 and Odds ratio 0.6173469387755102 with 42 reads
