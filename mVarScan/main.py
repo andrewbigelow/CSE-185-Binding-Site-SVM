@@ -53,8 +53,12 @@ if __name__ == "__main__":
     if args.min_reads2 is not None:
         min_reads2 = args.min_reads2
 
+    min_avg_qual = 15
+    if args.min_avg_qual is not None:
+        min_avg_qual = args.min_avg_qual
     
     # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
-    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads2)
+    caller = VariantCaller(mpileup_parser, min_var_frequency, min_frequency_for_hom, pvalue, \
+                        output_file, min_reads2, min_avg_qual)
     caller.find_snps()
