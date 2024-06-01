@@ -4,6 +4,10 @@ from scipy.stats import fisher_exact
 # TODO: Make sure we initialize min_var_freq as well as min_homozygous_freq
 # TODO: Need to add min_homozygous_freq
 class VariantCaller:
+    '''
+    varient_caller object used to call mVarScan in main
+    populated with command line arguments
+    '''
     def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads=2):
         self.parser = parser
         self.min_var_freq = min_var_frequency
@@ -11,7 +15,23 @@ class VariantCaller:
         self.pvalue = pvalue
         self.output_file = output_file
         self.min_reads = min_reads
+    
+    '''
+    DESCRIPTION:
+        iterates over the mpileup data for a given base and compares the frequency
+        of alternate bases to the reference bases and based on input min frequency
+        will return True if the alternate freq is higher (SNP)
 
+    PARAMETERS:
+        counts: a dictionary representing the 5th file of the mpileup data
+                which represents the reads compared to the reference base
+
+        total_reads: total number of reads for any given base
+    
+    RETURNS:
+        if given read is an SNP: returns True, the alternate base itself, and the frequency of that base
+        otherwise returns False, None for the base, and 0 for the frequency
+    '''
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
             if base != 'N' and base != 'del' and base != '.' and base != ',':
@@ -21,7 +41,17 @@ class VariantCaller:
         return False, None, 0
 
 
-    # Call if is_SNP() returns true
+    '''
+    USAGE: 
+        call only if is_SNP() returns True
+
+    PARAMETERS:
+        base: alternate base from is_SNP()
+        freq: frequency of alternate base from is_SNP()
+
+    RETURNS:
+        True as well as the base and freq given the frequency is greater than the input min_homo
+    '''
     def is_homozygous_nonreference_SNP(self, base, freq) :
         if freq > self.min_frequency_for_hom :
             return True, base, freq
