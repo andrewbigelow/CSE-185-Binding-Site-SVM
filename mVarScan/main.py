@@ -42,6 +42,7 @@ if __name__ == "__main__":
     if args.pvalue is not None : 
         pvalue = args.pvalue
     
+    output_file = None
     if args.out is not None:
         output_file = args.out
     
