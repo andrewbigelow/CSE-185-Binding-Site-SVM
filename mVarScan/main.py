@@ -23,7 +23,7 @@ if __name__ == "__main__":
                         type=float, required=False)
     parser.add_argument("-r2", "--min-reads2", help="Minimum supporting reads at a position to call variants. Default 2", \
                         type=int, required=False, default=2)
-    parser.add_argument("-q", "-min-avg-qual", help="Minimum base quality at a position to count a read. Default 15", \
+    parser.add_argument("-q", "--min-avg-qual", help="Minimum base quality at a position to count a read. Default 15", \
                         type=int, required=False, default=15)
 
     args = parser.parse_args()

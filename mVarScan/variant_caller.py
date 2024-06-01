@@ -8,13 +8,14 @@ class VariantCaller:
     varient_caller object used to call mVarScan in main
     populated with command line arguments
     '''
-    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads=2):
+    def __init__(self, parser, min_var_frequency, min_frequency_for_hom, pvalue, output_file, min_reads, min_avg_qual):
         self.parser = parser
         self.min_var_freq = min_var_frequency
         self.min_frequency_for_hom = min_frequency_for_hom
         self.pvalue = pvalue
         self.output_file = output_file
         self.min_reads = min_reads
+        self.min_avg_qual = min_avg_qual
     
     '''
     DESCRIPTION:
