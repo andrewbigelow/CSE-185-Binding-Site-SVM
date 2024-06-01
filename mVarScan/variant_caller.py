@@ -94,19 +94,32 @@ class VariantCaller:
         file =  self.parser.read_mpileup_file()
         results = []
         for line in file:
-            chrom, pos, ref_base, coverages, reads = self.parser.parse_line(line)
-            for read in reads:
+            chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
+
+            # zip() helps pairwise iteration over reads and base_qualities
+            for read, base_quality in zip(reads, base_qualities):
+                avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
+                # if average base quality is less than the minimum, do not parse the read
+                if avg_qual < self.min_avg_qual:
+                    continue
+
                 counts = self.count_bases(read)
                 total_reads = sum(counts.values())
+                # print("read = ",read)
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
+                
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant and counts.get(variant_base) >= self.min_reads:
                     odds_ratio, pval = self.get_pval(counts)
                     is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
-                    if (is_homo and pval < self.pvalue) :
-                        result = f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} with {counts.get(variant_base)} reads"
-                    elif (pval < self.pvalue):
-                        result = f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} with {counts.get(variant_base)} reads"
+                    if is_homo and pval < self.pvalue:
+                        result = (f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} "
+                                f"with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} "
+                                f"with {counts.get(variant_base)} reads and {avg_qual} average base quality")
+                    elif pval < self.pvalue:
+                        result = (f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} "
+                                f"with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} "
+                                f"with {counts.get(variant_base)} read and {avg_qual} average base quality")
                     else:
                         result = None
                     
@@ -114,7 +127,7 @@ class VariantCaller:
                         if self.output_file:
                             results.append(result)
                         else:
-                            print(result)    
+                            print(result)
 
         # Output to a file
         if self.output_file is not None:
