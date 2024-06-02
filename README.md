@@ -17,6 +17,10 @@ This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs 
     -h --min-homo-frequency FREQUENCY (minimum frequency to call a non-reference homozygous mutation, default: 0.8)
     -p --pvalue FLOAT (p-value threshold to output SNP, default: 0.99)
     -r2 --min-reads2 INT (minimum supporting reads at a position to call variants, default: 2)
+    -q --min-avg-qual INT (minimum average base quality at a position to count a read, default: 15)
 
 ### OUTPUT:
 The output will specify chromosome positions and the alternative allele frequency.
+
+### NOTES:
+- The `--min-avg-qual` option sets the minimum average Phred quality score for bases to be considered in variant calling. Phred quality scores are a common metric in sequencing data quality control, indicating the probability of a base call being incorrect. For more information about Phred scores, refer to [this link](https://drive5.com/usearch/manual10/quality_score.html).
