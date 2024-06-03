@@ -35,7 +35,7 @@ class VariantCaller:
     '''
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
-            if base != 'N' and base != 'del' and base != '.' and base != ',':
+            if base not in ['N', 'del', '.', ',']:
                 freq = count / total_reads
                 if freq > self.min_var_freq :
                     return True, base, freq
@@ -79,7 +79,7 @@ class VariantCaller:
             if count == '.' or count == ',' :
                 ref_count += counts[count]
                 total_count += counts[count]
-            elif count == 'del' :
+            elif count == 'del' or count == 'N' :
                 continue
             else :
                 alt_count += counts[count]
@@ -128,6 +128,7 @@ class VariantCaller:
                         result = None
                     
                     if result:
+                        total_snps += 1
                         if self.output_file:
                             results.append(result)
                         else:
