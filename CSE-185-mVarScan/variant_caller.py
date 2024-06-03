@@ -53,11 +53,12 @@ class VariantCaller:
     RETURNS:
         True as well as the base and freq given the frequency is greater than the input min_homo
     '''
-    def is_homozygous_nonreference_SNP(self, base, freq) :
+    def is_homozygous_nonreference_SNP(self, freq) :
         if freq > self.min_freq_for_hom :
-            return True, base, freq
-        return False, None, 0
+            return True
+        return False
 
+ 
     def count_bases(self, read_bases):
         counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0, '.': 0, ',': 0}
         for base in read_bases:
@@ -104,14 +105,17 @@ class VariantCaller:
                     continue
 
                 counts = self.count_bases(read)
-                total_reads = sum(counts.values())
+                total_reads = sum(counts.values()) - counts.get('del') - counts.get('N')
+                if total_reads < self.min_reads:
+                    continue
+
                 # print("read = ",read)
                 is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
-                if is_variant and counts.get(variant_base) >= self.min_reads:
+                if is_variant:
                     odds_ratio, pval = self.get_pval(counts)
-                    is_homo, homo_base, homo_freq = self.is_homozygous_nonreference_SNP(counts, total_reads)
+                    is_homo = self.is_homozygous_nonreference_SNP(freq)
                     if is_homo and pval < self.pvalue:
                         result = (f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} "
                                 f"with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} "
