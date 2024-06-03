@@ -94,6 +94,7 @@ class VariantCaller:
     def find_snps(self):
         file =  self.parser.read_mpileup_file()
         results = []
+        total_snps = 0
         for line in file:
             chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
 
@@ -113,6 +114,7 @@ class VariantCaller:
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant:
+                    total_snps += 1
                     odds_ratio, pval = self.get_pval(counts)
                     is_homo = self.is_homozygous_nonreference_SNP(freq)
                     if is_homo and pval < self.pvalue:
@@ -140,3 +142,4 @@ class VariantCaller:
                 print("Results of mVarScan output to: " + self.output_file)
 
         # TODO: add VCF and CSV TSV options
+        print("Total number of SNPs found: " + str(total_snps) + '\n')
