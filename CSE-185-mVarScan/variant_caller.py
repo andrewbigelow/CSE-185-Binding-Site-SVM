@@ -105,12 +105,11 @@ class VariantCaller:
                     continue
 
                 counts = self.count_bases(read)
-                total_reads = sum(counts.values()) - counts.get('del') - counts.get('N')
-                if total_reads < self.min_reads:
+                if coverages < self.min_reads:
                     continue
 
                 # print("read = ",read)
-                is_variant, variant_base, freq = self.is_SNP(counts, total_reads)
+                is_variant, variant_base, freq = self.is_SNP(counts, coverages)
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant:
