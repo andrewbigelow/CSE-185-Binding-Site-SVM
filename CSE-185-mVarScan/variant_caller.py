@@ -114,7 +114,6 @@ class VariantCaller:
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant:
-                    total_snps += 1
                     odds_ratio, pval = self.get_pval(counts)
                     is_homo = self.is_homozygous_nonreference_SNP(freq)
                     if is_homo and pval < self.pvalue:
