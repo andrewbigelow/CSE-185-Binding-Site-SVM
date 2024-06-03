@@ -98,18 +98,18 @@ class VariantCaller:
             chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
 
             # zip() helps pairwise iteration over reads and base_qualities
-            for read, base_quality in zip(reads, base_qualities):
+            for coverage, read, base_quality in zip(coverages, reads, base_qualities):
                 avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
                 # if average base quality is less than the minimum, do not parse the read
                 if avg_qual < self.min_avg_qual:
                     continue
 
                 counts = self.count_bases(read)
-                if coverages < self.min_reads:
+                if int(coverage) < self.min_reads:
                     continue
 
                 # print("read = ",read)
-                is_variant, variant_base, freq = self.is_SNP(counts, coverages)
+                is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant:
