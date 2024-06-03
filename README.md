@@ -4,9 +4,10 @@ This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs 
 
 ### REQUIREMENTS:
 - Ensure that you have Python 3.10 and above
+- scipy.stats
 
 ### INSTALLATION:
-- Clone the git repository or download the code locally as a ZIP
+- pip install mVarScan
 
 ### BASIC USAGE:
     python path/to/file/main.py [mpileup]
@@ -14,7 +15,7 @@ This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs 
 ### OPTIONAL:
     -o --out FILENAME (file to output contents to)
     -m --min-var-frequency FREQUENCY (minimum frequency to call a non-reference mutation, default: 0.2)
-    -h --min-homo-frequency FREQUENCY (minimum frequency to call a non-reference homozygous mutation, default: 0.8)
+    -h --min-freq-for-hom FREQUENCY (minimum frequency to call a non-reference homozygous mutation, default: 0.8)
     -p --pvalue FLOAT (p-value threshold to output SNP, default: 0.99)
     -r2 --min-reads2 INT (minimum supporting reads at a position to call variants, default: 2)
     -q --min-avg-qual INT (minimum average base quality at a position to count a read, default: 15)
