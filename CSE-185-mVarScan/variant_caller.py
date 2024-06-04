@@ -36,9 +36,9 @@ class VariantCaller:
     '''
     def is_SNP(self, counts, total_reads) :
         for base, count in counts.items() :
-            if base not in ['N', 'del', '.', ',']:
+            if base not in ['N', 'del', '.', ',', 'ins']:
                 freq = count / total_reads
-                if freq > self.min_var_freq and count > self.min_reads2:
+                if freq > self.min_var_freq and count >= self.min_reads2:
                     return True, base, freq
         return False, None, 0
 
@@ -61,15 +61,52 @@ class VariantCaller:
 
     # TODO: Remove N
     def count_bases(self, read_bases):
-        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0, '.': 0, ',': 0}
-        for base in read_bases:
-            if(base in counts):
+        counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0, 'N': 0, 'del': 0, 'ins': 0, '.': 0, ',': 0}
+        i = 0
+        while i < len(read_bases):
+            base = read_bases[i]
+            # Skip the next character which is the mapping quality
+            if base == '^':
+                # Move past the '^' and the following quality character
+                i += 2
+            # End of a read segment, move past
+            elif base == '$':
+                i += 1
+            # Check for matches and mismatches
+            elif base in counts:
                 counts[base] += 1
-            elif(base.upper() in counts):
+                i += 1
+            # Handle case for mismatches on reverse strand
+            elif base.upper() in counts:
                 counts[base.upper()] += 1
-            elif(base == '*' or base == '-'):
+                i += 1
+            # Deletion of the reference base
+            elif base == '*' or base == '#':
                 counts['del'] += 1
+                i += 1
+            # Insertion or deletion
+            elif base == '+' or base == '-':
+                # Move past the '+' or '-'
+                i += 1
+                number = ''
+                while i < len(read_bases) and read_bases[i].isdigit():
+                    number += read_bases[i]
+                    i += 1
+                # Length of the insertion/deletion
+                length = int(number) 
+                # Skip the actual inserted/deleted bases
+                i += length
+                if base == '+':
+                    # Count each inserted base
+                    counts['ins'] += length
+                else:
+                    # Count each deleted base
+                    counts['del'] += length 
+            else:
+                # Move past any unexpected characters
+                i += 1
         return counts
+
     
     def get_pval(self, counts):
         ref_count = 0
@@ -80,12 +117,11 @@ class VariantCaller:
             if count == '.' or count == ',' :
                 ref_count += counts[count]
                 total_count += counts[count]
-            elif count == 'del' or count == 'N' :
+            elif count == 'del' or count == 'N' or count == 'ins' :
                 continue
             else :
                 alt_count += counts[count]
                 total_count += counts[count]
-        
         table = [[ref_count, alt_count], [total_count - ref_count, total_count - alt_count]]
         odds_ratio, p_value = fisher_exact(table)
 
