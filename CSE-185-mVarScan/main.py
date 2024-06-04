@@ -23,9 +23,10 @@ if __name__ == "__main__":
                         type=float, required=False)
     parser.add_argument("-r2", "--min-reads2", help="Minimum supporting reads at a position to call variants. Default 2", \
                         type=int, required=False, default=2)
+    parser.add_argument("-c", "--min-coverage", help="Minimum read depth at a position to make a call. Default 8", \
+                        type=int, required=False, default=8)
     parser.add_argument("-q", "--min-avg-qual", help="Minimum base quality at a position to count a read (Phred). Default 15", \
                         type=int, required=False, default=15)
-
     args = parser.parse_args()
     
     # Populate variables from command line tool
@@ -53,6 +54,10 @@ if __name__ == "__main__":
     min_reads2 = 2
     if args.min_reads2 is not None:
         min_reads2 = args.min_reads2
+
+    min_coverage = 2
+    if args.min_coverage is not None:
+        min_coverage = args.min_coverage
 
     min_avg_qual = 15
     if args.min_avg_qual is not None:
