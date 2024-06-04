@@ -3,9 +3,6 @@ When running VarScan using the command:
 ```bash
 time java -jar VarScan.jar mpileup2snp ~/downloads/trio.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --p-va
 lue 0.01 --output-vcf 1 --variants snp > trio.vcf
-```   
-The total time it took running was:
-```bash
 Only SNPs will be reported
 Min coverage:   8
 Min reads2:     2
@@ -18,14 +15,13 @@ Reading input from /Users/andrewbigelow/downloads/trio.mpileup
 3 were failed by the strand-filter
 41 variant positions reported (41 SNP, 0 indel)
 
-real    0m24.796s
-user    0m46.863s
-sys     0m0.918s
+real    0m33.833s
+user    0m55.287s
+sys     0m0.866s
 ```
 Next Dataset:
 ```bash
-time java -jar VarScan.jar mpileup2snp ~/downloads/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0
-.8 --p-value 0.01 --output-vcf 1 --variants snp > trio.vcf
+time java -jar VarScan.jar mpileup2snp ~/downloads/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --p-value 0.01 --output-vcf 1 --variants snp > trio.vcf
 Only SNPs will be reported
 Min coverage:   8
 Min reads2:     2
@@ -38,28 +34,30 @@ Reading input from /Users/andrewbigelow/downloads/NA12878_child.mpileup
 1 were failed by the strand-filter
 37 variant positions reported (37 SNP, 0 indel)
 
-real    0m36.097s
-user    0m52.578s
-sys     0m1.494s
+real    0m18.368s
+user    0m28.894s
+sys     0m0.567s
 ```
    
 When running mVarScan on the same file with the same options used (excluding --variants snp because our program is only meant for SNPs) the output time was:
 ```bash
+time python3 /Users/andrewbigelow/Documents/GitHub/CSE-185-Binding-Site-SVM//CSE-185-mVarScan/main.py ~/downloads/trio.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt
+Results of mVarScan output to: output.txt
+Total number of SNPs found: 37
+
+
+real    0m32.106s
+user    0m30.379s
+sys     0m0.609s
+```
+Next Dataset:
+```bash
 time python3 /Users/andrewbigelow/Documents/GitHub/CSE-185-Binding-Site-SVM//CSE-185-mVarScan/main.py ~/downloads/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt
 Results of mVarScan output to: output.txt
-Total number of SNPs found: 15
+Total number of SNPs found: 11
 
 
-real    0m12.719s
-user    0m9.583s
-sys     0m0.801s
+real    0m5.454s
+user    0m5.504s
+sys     0m0.228s
 ```
-   
-   
-   
-On our tool, the output was slighlty different just due to formating but we got:
-```bash
-OUTPUT
-```
-   
-Overall the same SNPs were reported just in a different format meaning we had a very high accuracy (assuming VarScan is a ground truth).
