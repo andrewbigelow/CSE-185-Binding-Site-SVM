@@ -134,7 +134,7 @@ class VariantCaller:
         total_snps = 0
         for line in file:
             chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
-            
+
             # zip() helps pairwise iteration over reads and base_qualities
             for coverage, read, base_quality in zip(coverages, reads, base_qualities):
                 avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
@@ -143,8 +143,6 @@ class VariantCaller:
                     continue
 
                 counts = self.count_bases(read)
-
-                # Checks if it have the minimum coverage
                 if int(coverage) < self.min_coverage:
                     continue
 

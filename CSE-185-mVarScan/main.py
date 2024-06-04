@@ -39,7 +39,7 @@ if __name__ == "__main__":
     if args.min_freq_for_hom is not None :
         min_freq_for_hom = args.min_freq_for_hom
 
-    pvalue = 0.01
+    pvalue = 0.99
     if args.pvalue is not None : 
         pvalue = args.pvalue
     
