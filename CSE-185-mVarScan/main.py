@@ -55,7 +55,7 @@ if __name__ == "__main__":
     if args.min_reads2 is not None:
         min_reads2 = args.min_reads2
 
-    min_coverage = 2
+    min_coverage = 8
     if args.min_coverage is not None:
         min_coverage = args.min_coverage
 
