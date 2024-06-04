@@ -117,7 +117,7 @@ class VariantCaller:
             if count == '.' or count == ',' :
                 ref_count += counts[count]
                 total_count += counts[count]
-            elif count == 'del' or count == 'N' or count == 'ins' :
+            elif count in ['del', 'N', 'ins'] :
                 continue
             else :
                 alt_count += counts[count]
@@ -125,7 +125,7 @@ class VariantCaller:
         table = [[ref_count, alt_count], [total_count - ref_count, total_count - alt_count]]
         odds_ratio, p_value = fisher_exact(table)
 
-        return odds_ratio, p_value
+        return p_value
     
     # TODO: Check if total reads is correct
     def find_snps(self):
@@ -151,15 +151,18 @@ class VariantCaller:
                 
                 # is variant and reads are more than or equal to threshold (min_reads)
                 if is_variant:
-                    odds_ratio, pval = self.get_pval(counts)
+                    if (self.pvalue != 0.99) :
+                        pval = self.get_pval(counts)
+                    else:
+                        pval = 0.98
                     is_homo = self.is_homozygous_nonreference_SNP(freq)
                     if is_homo and pval < self.pvalue:
                         result = (f"Homozygous SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} "
-                                f"with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} "
+                                f"with frequency {freq:.2f} and p value {pval} "
                                 f"with {counts.get(variant_base)} reads and {avg_qual} average base quality")
                     elif pval < self.pvalue:
                         result = (f"SNP found at {chrom}:{pos} -> {ref_base} to {variant_base} "
-                                f"with frequency {freq:.2f} and p value {pval} and Odds ratio {odds_ratio} "
+                                f"with frequency {freq:.2f} and p value {pval} "
                                 f"with {counts.get(variant_base)} read and {avg_qual} average base quality")
                     else:
                         result = None
