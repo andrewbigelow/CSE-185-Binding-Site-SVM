@@ -66,5 +66,5 @@ if __name__ == "__main__":
     # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
     caller = VariantCaller(mpileup_parser, min_var_frequency, min_freq_for_hom, pvalue, \
-                        output_file, min_reads2, min_avg_qual)
+                        output_file, min_reads2, min_coverage, min_avg_qual)
     caller.find_snps()
