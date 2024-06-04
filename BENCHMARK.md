@@ -45,25 +45,16 @@ sys     0m1.494s
    
 When running mVarScan on the same file with the same options used (excluding --variants snp because our program is only meant for SNPs) the output time was:
 ```bash
-TIME
+time python3 /Users/andrewbigelow/Documents/GitHub/CSE-185-Binding-Site-SVM//CSE-185-mVarScan/main.py ~/downloads/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt
+Results of mVarScan output to: output.txt
+Total number of SNPs found: 15
+
+
+real    0m12.719s
+user    0m9.583s
+sys     0m0.801s
 ```
    
-   
-# VarScan output
-To compare the actual accuracy of our tool we compared it to the output of VarScan. For the prior command, the output was:
-```bash
-Only SNPs will be reported
-Min coverage:   8
-Min reads2:     2
-Min var freq:   0.2
-Min avg qual:   15
-P-value thresh: 0.01
-Reading input from trio.mpileup
-200002 bases in pileup file
-53 variant positions (44 SNP, 9 indel)
-3 were failed by the strand-filter
-41 variant positions reported (41 SNP, 0 indel)
-```
    
    
 On our tool, the output was slighlty different just due to formating but we got:
