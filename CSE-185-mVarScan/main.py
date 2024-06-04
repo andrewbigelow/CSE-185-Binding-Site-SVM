@@ -1,7 +1,7 @@
 from mpileup_parser import MpileupParser
 from variant_caller import VariantCaller
-
 import argparse
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     parser.add_argument("mpileup", help="mpileup file", type=str, metavar="FILE")
     parser.add_argument("-o", "--out", help="Write output to simple text file. ", metavar="FILE", type=str, required=False)
-    parser.add_argument("-vcf", "--vcf", help="Write output to VCF format file. ", metavar="FILE", type=str, required=False)
+    parser.add_argument("-vcf", "--vcf", help="Write output to VCF format file. 1 for yes", metavar="FILE", type=str, required=False)
     parser.add_argument("-m", "--min-var-frequency", \
                         help="minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2", \
                         type=float, required=False)
@@ -40,6 +40,7 @@ if __name__ == "__main__":
         min_freq_for_hom = args.min_freq_for_hom
 
     pvalue = 0.99
+    
     if args.pvalue is not None : 
         pvalue = args.pvalue
     
@@ -48,6 +49,7 @@ if __name__ == "__main__":
         output_file = args.out
     
     # TODO: implement VCF output
+    vcf = 0
     if args.vcf is not None:
         vcf = args.vcf
 
@@ -63,8 +65,7 @@ if __name__ == "__main__":
     if args.min_avg_qual is not None:
         min_avg_qual = args.min_avg_qual
     
-    # TODO: Include freqs for the variant caller
     mpileup_parser = MpileupParser(mpileup)
     caller = VariantCaller(mpileup_parser, min_var_frequency, min_freq_for_hom, pvalue, \
-                        output_file, min_reads2, min_coverage, min_avg_qual)
+                        output_file, min_reads2, min_coverage, min_avg_qual, vcf)
     caller.find_snps()
