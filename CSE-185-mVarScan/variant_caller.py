@@ -8,13 +8,13 @@ class VariantCaller:
     varient_caller object used to call mVarScan in main
     populated with command line arguments
     '''
-    def __init__(self, parser, min_var_frequency, min_freq_for_hom, pvalue, output_file, min_reads, min_coverage, min_avg_qual):
+    def __init__(self, parser, min_var_frequency, min_freq_for_hom, pvalue, output_file, min_reads2, min_coverage, min_avg_qual):
         self.parser = parser
         self.min_var_freq = min_var_frequency
         self.min_freq_for_hom = min_freq_for_hom
         self.pvalue = pvalue
         self.output_file = output_file
-        self.min_reads = min_reads
+        self.min_reads2 = min_reads2
         self.min_coverage = min_coverage
         self.min_avg_qual = min_avg_qual
     
@@ -38,7 +38,7 @@ class VariantCaller:
         for base, count in counts.items() :
             if base not in ['N', 'del', '.', ',']:
                 freq = count / total_reads
-                if freq > self.min_var_freq :
+                if freq > self.min_var_freq and count > self.min_reads2:
                     return True, base, freq
         return False, None, 0
 
