@@ -6,6 +6,15 @@ This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs 
 - Ensure that you have Python 3.10 and above
 - scipy.stats
 
+These packages can be installed with `pip`:
+```
+pip install scipy.stats`
+```
+Note: If you do not have root access, you can run the command above with additional options to install locally:
+```
+pip install --user scipy.stats
+```
+
 ### INSTALLATION:
 - pip install mVarScan
 
