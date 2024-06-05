@@ -156,11 +156,15 @@ class VariantCaller:
         total_count = 0
 
         for count in counts:
+
+            # If reference base
             if count == '.' or count == ',' :
                 ref_count += counts[count]
                 total_count += counts[count]
             elif count in ['del', 'N', 'ins'] :
                 continue
+
+            # If alternative base
             else :
                 alt_count += counts[count]
                 total_count += counts[count]
@@ -183,11 +187,15 @@ class VariantCaller:
         print(f"P-value thresh:\t{self.pvalue}")
 
         print(f"Reading input from {self.parser.mpileup_file}")
+
         file = self.parser.read_mpileup_file()
         results = []
         total_snps = 0
         chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(file[1])
+
+        # Check if its only one sample
         if(len(coverages) == 1):
+            # Check if output is tab format
             if(self.tab == '1'):
                 header = "#CHROM\tPOS\tREF\tALT\tSAMPLE\t"
                 results.append(header)
@@ -199,27 +207,27 @@ class VariantCaller:
                         # if average base quality is less than the minimum, do not parse the read
                         if avg_qual < self.min_avg_qual:
                             continue
-                    counts = self.count_bases(read)
-                    if int(coverage) < self.min_coverage:
-                        continue
-                    # print("read = ",read)
-                    is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
-                    homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
-                    # is variant and reads are more than or equal to threshold (min_reads)
-                    if is_variant:
-                        if (self.pvalue != 0.99) :
-                            pval = self.get_pval(counts)
-                        else:
-                            pval = 0.98
-                        if pval <= self.pvalue:
-                            result = (f"{chrom}\t{pos}\t{ref_base}\t{variant_base}\t{homo_status}:{counts.get(variant_base, 0)},{coverage}:"
-                                    f"{avg_qual}:{freq}:{pval}")
-                        else:
-                            result = None
-
-                        if result:
-                            total_snps += 1
-                            results.append(result)
+                        counts = self.count_bases(read)
+                        # if coverage is less than the minimum, do not parse read
+                        if int(coverage) < self.min_coverage:
+                            continue
+                        is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
+                        homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
+                        # get p-value
+                        if is_variant:
+                            if (self.pvalue != 0.99) :
+                                pval = self.get_pval(counts)
+                            else:
+                                pval = 0.98
+                            # if p-value is less than or equal to minimum p-value, record snp
+                            if pval <= self.pvalue:
+                                result = (f"{chrom}\t{pos}\t{ref_base}\t{variant_base}\t{homo_status}:{counts.get(variant_base, 0)},{coverage}:"
+                                        f"{avg_qual}:{freq}:{pval}")
+                            else:
+                                result = None
+                            if result:
+                                total_snps += 1
+                                results.append(result)
             else:
                 for line in file:
                     chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
@@ -229,31 +237,33 @@ class VariantCaller:
                         # if average base quality is less than the minimum, do not parse the read
                         if avg_qual < self.min_avg_qual:
                             continue
-                    counts = self.count_bases(read)
-                    if int(coverage) < self.min_coverage:
-                        continue
-                    # print("read = ",read)
-                    is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
-                    homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
-                    # is variant and reads are more than or equal to threshold (min_reads)
-                    if is_variant:
-                        if (self.pvalue != 0.99) :
-                            pval = self.get_pval(counts)
-                        else:
-                            pval = 0.98
-                        is_homo = self.is_homozygous_nonreference_SNP(freq)
-                        if pval <= self.pvalue:
-                            result = (f"{chrom}:{pos} | Sample | {homo_status} | {ref_base} -> {variant_base} |"
-                                    f" frequency {freq:.2f} | p-value {pval} |"
-                                    f" reads {counts.get(variant_base, 0)},{coverage} | avg base quality {avg_qual}| ")
-                        else:
-                            result = None
-
-                        if result:
-                            total_snps += 1
-                            results.append(result)
+                        counts = self.count_bases(read)
+                        # if coverage is less than the minimum, do not parse the read
+                        if int(coverage) < self.min_coverage:
+                            continue
+                        is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
+                        homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
+                        if is_variant:
+                            # get p-value
+                            if (self.pvalue != 0.99) :
+                                pval = self.get_pval(counts)
+                            else:
+                                pval = 0.98
+                            is_homo = self.is_homozygous_nonreference_SNP(freq)
+                            # if p-value is less than or equal to minimum p-value, record snp
+                            if pval <= self.pvalue:
+                                result = (f"{chrom}:{pos} | Sample | {homo_status} | {ref_base} -> {variant_base} |"
+                                        f" frequency {freq:.2f} | p-value {pval} |"
+                                        f" reads {counts.get(variant_base, 0)},{coverage} | avg base quality {avg_qual}| ")
+                            else:
+                                result = None
+                            if result:
+                                total_snps += 1
+                                results.append(result)
         else:
+            # Check if output is tab format
             if(self.tab == '1'):
+                # Ensure header has extra columns for extra samples
                 num_samples = len(coverages)
                 header_base = "#CHROM\tPOS\tREF\tALT"
                 samples_header = "\t".join(f"SAMPLE_{i+1}" for i in range(num_samples))
@@ -264,30 +274,28 @@ class VariantCaller:
                     chrom, pos, ref_base, coverages, reads, base_qualities = self.parser.parse_line(line)
                     any_sample_variant = False
                     snp_found = f"{chrom}\t{pos}\t"
+                    snp_info_list = []      
 
-                    zipped_data = zip(coverages, reads, base_qualities)
-                    snp_info_list = []                
-                    for coverage, read, base_quality in zipped_data:
+                    for coverage, read, base_quality in zip(coverages, reads, base_qualities):
                         counts = self.count_bases(read)
                         pval = self.get_pval(counts) if self.pvalue != 0.99 else 0.98
-
                         is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
                         homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
-                        
+
                         # Calculate average base quality
                         avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
-
                         # Format SNP string
                         sample_snp = (f"{homo_status}:{counts.get(variant_base, 0)},{coverage}:"
                                     f"{avg_qual}:{freq}:{pval}")
-
                         snp_info_list.append(sample_snp)
-
                         # Determine if any of the reads in the line pass the SNP conditions
                         if is_variant and pval <= self.pvalue and avg_qual >= self.min_avg_qual and int(coverage) >= self.min_coverage:
+                            # if this is the first read, attach the ref_base and variant base to snp record
                             if(not any_sample_variant):
                                 snp_found += f"{ref_base}\t{variant_base}\t"
                             any_sample_variant = True
+
+                    # if any of the reads were a variant, record snp to results
                     if any_sample_variant:
                         total_snps += 1
                         snp_found += "\t".join(snp_info_list)
@@ -298,31 +306,27 @@ class VariantCaller:
                     any_sample_variant = False
                     sample_num = 0
                     snp_found = f"{chrom}:{pos} | "
+                    snp_info_list = []      
 
-                    zipped_data = zip(coverages, reads, base_qualities)
-                    snp_info_list = []                
-                    for coverage, read, base_quality in zipped_data:
+                    for coverage, read, base_quality in zip(coverages, reads, base_qualities):
                         sample_num += 1
                         counts = self.count_bases(read)
                         pval = self.get_pval(counts) if self.pvalue != 0.99 else 0.98
-
                         is_variant, variant_base, freq = self.is_SNP(counts, int(coverage))
                         homo_status = "1/1" if self.is_homozygous_nonreference_SNP(freq) else "0/1"
-                        
+
                         # Calculate average base quality
                         avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
-
                         # Format SNP string
                         sample_snp = (f"Sample {sample_num} | {homo_status} | {ref_base} -> {variant_base} |"
                                     f" frequency {freq:.2f} | p-value {pval} |"
                                     f" reads {counts.get(variant_base, 0)},{coverage} | avg base quality {avg_qual}| ")
-
                         snp_info_list.append(sample_snp)
-
                         # Determine if any of the reads in the line pass the SNP conditions
                         if is_variant and pval <= self.pvalue and avg_qual >= self.min_avg_qual and int(coverage) >= self.min_coverage:
                             any_sample_variant = True
-
+                            
+                    # if any of the reads were a variant, record snp to results
                     if any_sample_variant:
                         total_snps += 1
                         snp_found += " ".join(snp_info_list)
