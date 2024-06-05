@@ -41,25 +41,25 @@ sys     0m0.567s
    
 When running mVarScan on the same file with the same options used (excluding --variants snp because our program is only meant for SNPs) the output time was:
 ```bash
-time python3 path/to/file/main.py path/to/file/trio.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt
+time python3 path/to/file/main.py path/to/file/trio.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt --tab 1
 Results of mVarScan output to: output.txt
 Total number of SNPs found: 21
 
 
-real    16m39.268s
-user    16m29.433s
-sys     0m3.013s
+real    23m16.911s
+user    20m59.112s
+sys     0m10.737s
 ```
 Next Dataset:
 ```bash
-time python3 path/to/file/main.py path/to/file/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.vcf
+time python3 path/to/file/main.py path/to/file/NA12878_child.mpileup --min-var-frequency 0.2 --min-freq-for-hom 0.8 --pvalue 0.01 --out output.txt --tab 1
 Results of mVarScan output to: output.txt
 Total number of SNPs found: 11
 
 
-real    6m1.881s
-user    5m44.120s
-sys     0m2.627s
+real    0m5.577s
+user    0m5.578s
+sys     0m0.246s
 ```
   
   

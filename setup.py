@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name='CSE-185-mVarScan',
+    name='mVarScan',
     version='0.1.0',    
     description='An implementation of the existing VarScan tool. Used to find SNPs given a .mpileup file',
-    url='https://github.com/andrewbigelow/CSE-185-mVarScan/tree/main',
+    url='https://github.com/andrewbigelow/mVarScan/tree/main',
     author='Andrew Bigelow, Numaan Formoli, Aditya Parmar',
     author_email='abigelow@ucsd.edu, nformoli@ucsd.edu, atparmar@ucsd.edu',
     license='N/A',
-    packages=['CSE-185-mVarScan'],
+    packages=['mVarScan'],
     install_requires=['mpi4py>=3.0',
                       'scipy.stats',                     
                       ],
