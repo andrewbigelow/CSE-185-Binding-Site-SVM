@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='mVarScan',
     version='0.1.0',    
-    description='An implementation of the existing VarScan tool. Used to find SNPs given a .mpileup file',
+    description='An implementation of the existing VarScan tool (specifically mpileup2snp option). Used to find SNPs given a .mpileup file',
     url='https://github.com/andrewbigelow/mVarScan/tree/main',
     author='Andrew Bigelow, Numaan Formoli, Aditya Parmar',
     author_email='abigelow@ucsd.edu, nformoli@ucsd.edu, atparmar@ucsd.edu',
