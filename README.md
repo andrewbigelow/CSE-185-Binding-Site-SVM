@@ -1,6 +1,6 @@
 # mVarScan
 
-This project is for CSE 185. It implements a subset of "VarScan" and finds SNPs within a given aligned genome in the form of a mpileup file.
+This project is for CSE 185. It implements a subset of `mpileup2snp` and finds SNPs within a given aligned genome in the form of a mpileup file. See [VarScan](https://varscan.sourceforge.net/using-varscan.html) for more details
 
 [REQUIREMENTS](#requirements) | [INSTALLATION](#installation) | [BASIC USAGE](#usage) | [OPTIONAL](#optional) | [File formats](#formats) | [Miro board](#miro)
 
@@ -32,11 +32,12 @@ python path/to/file/CSE-185-mVarScan/main.py [mpileup]
 <a name="optional"></a>
 ## OPTIONAL:
     -o --out FILENAME (file to output contents to)
-    -t --tab (1 for yes) (output using TAB formating)
+    -t --tab (1 for yes) (output using TAB formating, default: 0)
     -m --min-var-frequency FREQUENCY (minimum frequency to call a non-reference mutation, default: 0.2)
     -h --min-freq-for-hom FREQUENCY (minimum frequency to call a non-reference homozygous mutation, default: 0.8)
     -p --pvalue FLOAT (p-value threshold to output SNP, default: 0.99)
     -r2 --min-reads2 INT (minimum supporting reads at a position to call variants, default: 2)
+    -c --min-coverage INT (Minimum read depth at a position to make a call. Default 8)
     -q --min-avg-qual INT (minimum average base quality at a position to count a read, default: 15)
 
 
