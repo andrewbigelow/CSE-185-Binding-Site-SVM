@@ -190,7 +190,7 @@ class VariantCaller:
                             pval = 0.98
                         is_homo = self.is_homozygous_nonreference_SNP(freq)
                         if pval <= self.pvalue:
-                            result = (f"Sample | {homo_status} | {ref_base} -> {variant_base} |"
+                            result = (f"{chrom}:{pos} | Sample | {homo_status} | {ref_base} -> {variant_base} |"
                                     f" frequency {freq:.2f} | p-value {pval} |"
                                     f" reads {counts.get(variant_base, 0)},{coverage} | avg base quality {avg_qual}| ")
                         else:
