@@ -22,7 +22,7 @@ pip install --user scipy.stats
 ## INSTALLATION:
 ```
 git clone https://github.com/andrewbigelow/mVarScan.git
-cd 
+cd mVarScan
 ```
 
 <a name="usage"></a>
