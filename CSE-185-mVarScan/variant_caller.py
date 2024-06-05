@@ -219,7 +219,7 @@ class VariantCaller:
                     avg_qual = sum(ord(q) - 33 for q in base_quality) / len(base_quality)
 
                     # Format SNP string
-                    sample_snp = (f"{homo_status}:{counts.get(variant_base, 0)}:"
+                    sample_snp = (f"{homo_status}:{counts.get(variant_base, 0)},{coverage}:"
                                 f"{avg_qual}:{freq}:{pval}")
 
                     snp_info_list.append(sample_snp)
@@ -256,7 +256,7 @@ class VariantCaller:
                     # Format SNP string
                     sample_snp = (f"Sample {sample_num} | {homo_status} | {ref_base} -> {variant_base} |"
                                 f" frequency {freq:.2f} | p-value {pval} |"
-                                f" reads {counts.get(variant_base, 0)} | avg base quality {avg_qual}| ")
+                                f" reads {counts.get(variant_base, 0)},{coverage} | avg base quality {avg_qual}| ")
 
                     snp_info_list.append(sample_snp)
 
