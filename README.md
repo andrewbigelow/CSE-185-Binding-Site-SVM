@@ -24,7 +24,10 @@ pip install --user scipy.stats
 
 <a name="usage"></a>
 ## BASIC USAGE:
-    python path/to/file/CSE-185-mVarScan/main.py [mpileup]
+The basic usage of `mVarScan` is:
+```
+python path/to/file/CSE-185-mVarScan/main.py [mpileup]
+```
 
 <a name="optional"></a>
 ## OPTIONAL:
