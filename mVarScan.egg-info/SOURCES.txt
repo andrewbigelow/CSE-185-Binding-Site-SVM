@@ -1,0 +1,14 @@
+README.md
+setup.py
+mVarScan/__init__.py
+mVarScan/__main__.py
+mVarScan/cli.py
+mVarScan/main.py
+mVarScan/mpileup_parser.py
+mVarScan/variant_caller.py
+mVarScan.egg-info/PKG-INFO
+mVarScan.egg-info/SOURCES.txt
+mVarScan.egg-info/dependency_links.txt
+mVarScan.egg-info/entry_points.txt
+mVarScan.egg-info/requires.txt
+mVarScan.egg-info/top_level.txt
