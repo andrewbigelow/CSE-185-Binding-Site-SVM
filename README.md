@@ -29,7 +29,7 @@ cd mVarScan
 ## BASIC USAGE:
 The basic usage of `mVarScan` is:
 ```
-python path/to/file/CSE-185-mVarScan/main.py [options] [mpileup]
+python path/to/file/mVarScan/main.py [options] [mpileup]
 ```
 
 <a name="optional"></a>
