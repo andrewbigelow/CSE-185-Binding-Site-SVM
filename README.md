@@ -2,7 +2,7 @@
 
 This project is for CSE 185. It implements a subset of `mpileup2snp` and finds SNPs within a given aligned genome in the form of a mpileup file. See [VarScan](https://varscan.sourceforge.net/using-varscan.html) for more details
 
-[REQUIREMENTS](#requirements) | [INSTALLATION](#installation) | [BASIC USAGE](#usage) | [OPTIONAL](#optional) | [File formats](#format) | [Miro board](#miro)
+[REQUIREMENTS](#requirements) | [INSTALLATION](#installation) | [BASIC USAGE](#usage) | [OPTIONAL](#optional) | [File formats](#format)
 
 <a name="requirements"></a>
 ## REQUIREMENTS:
