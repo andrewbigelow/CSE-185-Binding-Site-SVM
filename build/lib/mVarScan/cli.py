@@ -9,7 +9,7 @@ def parse_arguments() :
 
     parser.add_argument("mpileup", help="mpileup file", type=str, metavar="FILE")
     parser.add_argument("-o", "--out", help="Write output to simple text file. ", metavar="FILE", type=str, required=False)
-    parser.add_argument("-t", "--tab", help="Write output to TAB format file. 1 for yes", metavar="FILE", type=str, required=False)
+    parser.add_argument("-t", "--tab", help="Write output to TAB format. 1 for yes", metavar="FLAG", type=str, required=False)
     parser.add_argument("-m", "--min-var-frequency", \
                         help="minumum frequency to call a non-reference a mutation. If not called: will auto to 0.2", \
                         type=float, required=False)
