@@ -21,15 +21,14 @@ pip install --user scipy.stats
 <a name="installation"></a>
 ## INSTALLATION:
 ```
-git clone https://github.com/andrewbigelow/mVarScan.git
-cd mVarScan
+pip install mVarScan
 ```
 
 <a name="usage"></a>
 ## BASIC USAGE:
 The basic usage of `mVarScan` is:
 ```
-python path/to/file/mVarScan/main.py [options] [mpileup]
+python mVarScan [options] [mpileup]
 ```
 
 <a name="optional"></a>
