@@ -7,10 +7,14 @@ This project is for CSE 185. It implements a subset of `mpileup2snp` and finds S
 <a name="requirements"></a>
 ## REQUIREMENTS:
 - Ensure that you have Python 3.10 and above
-- scipy.stats
+- Packages
+    - mpich
+- Python-specific Packages
+    - scipy.stats
 
-These packages can be installed with `pip`:
+These packages can be installed with `pip` and `brew`:
 ```
+brew install mpich
 pip install scipy.stats
 ```
 Note: If you do not have root access, you can run the command above with additional options to install locally:
